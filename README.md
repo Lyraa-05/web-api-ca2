@@ -1,2 +1,3 @@
-# web-api-ca2
-Repository for my second assignment for Web App development
+# Assignment 2 - Web API.
+
+Name: Michal Lyra
