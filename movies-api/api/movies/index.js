@@ -5,6 +5,8 @@ import { getMovies } from '../tmdb-api';
 const router = express.Router();
 
 // movie routes to be added
+
+
 router.get('/discover', asyncHandler(async (req, res) => {
     const discoverMovies = await getMovies();
     res.status(200).json(discoverMovies);

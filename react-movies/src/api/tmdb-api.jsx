@@ -1,7 +1,7 @@
 //updated basic discover movies to include movies that have atleast 1000 votes to avoid obscure movies, now there is a different output to popularmovies.
 export const getMovies = (page = 1) => {
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}&sort_by=vote_average.desc&vote_count.gte=1000`
+    `http://localhost:8080/api/movies/discover`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
