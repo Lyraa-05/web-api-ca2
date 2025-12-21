@@ -23,20 +23,20 @@ const LoginPage = () => {
     }
 
     return (
-        <div className="login-container">
-            <div className="login-box">
-                <div className="login-header">
-                    <h2 className="login-title">Welcome Back</h2>
-                    <p className="login-subtitle">Log in to view your favorites and playlists</p>
+        <div className="auth-container">
+            <div className="auth-box">
+                <div className="auth-header">
+                    <h2 className="auth-title">Welcome Back</h2>
+                    <p className="auth-subtitle">Log in to view your favorites and playlists</p>
                 </div>
                 
-                <div className="login-form">
+                <div className="auth-form">
                     <div className="input-group">
                         <label className="input-label" htmlFor="username">Username</label>
                         <input 
                             id="username" 
                             placeholder="Enter your username" 
-                            className="login-input"
+                            className="auth-input"
                             onChange={e => setUserName(e.target.value)}
                         />
                     </div>
@@ -47,18 +47,18 @@ const LoginPage = () => {
                             id="password" 
                             type="password" 
                             placeholder="Enter your password" 
-                            className="login-input"
+                            className="auth-input"
                             onChange={e => setPassword(e.target.value)}
                         />
                     </div>
                     
-                    <button onClick={login} className="login-button">
+                    <button onClick={login} className="auth-button">
                         Log In
                     </button>
                     
-                    <div className="login-footer">
-                        <p className="login-footer-text">
-                            Not registered? <Link to="/signup" className="login-link">Sign Up!</Link>
+                    <div className="auth-footer">
+                        <p className="auth-footer-text">
+                            Not registered? <Link to="/signup" className="auth-link">Sign Up!</Link>
                         </p>
                     </div>
                 </div>
