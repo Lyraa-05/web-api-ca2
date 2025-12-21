@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -11,26 +11,32 @@ import { useNavigate } from "react-router";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
+import {AuthContext} from "../../contexts/authContext.jsx"
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
+  const context = useContext(AuthContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   
   const navigate = useNavigate();
 
-  const menuOptions = [
+  const baseMenuOptions = [
     { label: "Home", path: "/" },
-    { label: "Favorites", path: "/movies/favorites" },
-    { label: "Playlists", path: "/movies/playlists"},
     { label: "Upcoming Movies", path: "/movies/upcoming" },
     { label: "Popular Movies", path: "/movies/popular" },
-
   ];
+  
+  
+  const protectedMenuOptions = [
+      { label: "Favorites", path: "/movies/favorites" },
+      { label: "Playlists", path: "/movies/playlists"},
+  ]
+
+  //if logged in show everything
+  const menuOptions = context.isAuthenticated ? [...baseMenuOptions, ...protectedMenuOptions]: baseMenuOptions;
 
   const handleMenuSelect = (pageURL) => {
     setAnchorEl(null);
@@ -98,6 +104,27 @@ const SiteHeader = () => {
                     {opt.label}
                   </Button>
                 ))}
+              </>
+            )}
+            
+            {/* Auth status and buttons */}
+            {context.isAuthenticated ? (
+              <>
+                <Typography variant="body1" sx={{ marginLeft: 2, marginRight: 1 }}>
+                  Welcome {context.userName}!
+                </Typography>
+                <Button color="inherit" onClick={() => context.signout()}>
+                  Sign out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Typography variant="body1" sx={{ marginLeft: 2, marginRight: 1 }}>
+                  Not logged in
+                </Typography>
+                <Button color="inherit" onClick={() => navigate("/login")}>
+                  Login
+                </Button>
               </>
             )}
         </Toolbar>
