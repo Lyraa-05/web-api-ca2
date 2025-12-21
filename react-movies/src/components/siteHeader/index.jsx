@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {AuthContext} from "../../contexts/authContext.jsx"
+
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = () => {
@@ -124,6 +125,9 @@ const SiteHeader = () => {
                 </Typography>
                 <Button color="inherit" onClick={() => navigate("/login")}>
                   Login
+                </Button>
+                <Button color="inherit" onClick={() => navigate("/signup")}>
+                  Sign up
                 </Button>
               </>
             )}

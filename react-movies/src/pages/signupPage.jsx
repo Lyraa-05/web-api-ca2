@@ -1,6 +1,8 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Navigate } from "react-router";
 import { AuthContext } from '../contexts/authContext';
+import '../main.css';
+
 
 const SignUpPage = () => {
   const context = useContext(AuthContext)
