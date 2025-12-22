@@ -18,7 +18,6 @@ import MovieRecommendationsPage from "./pages/movieRecommendationsPage";
 import PlaylistMoviesPage from "./pages/playlistPage";
 import SignupPage from "./pages/signupPage";
 import LoginPage from "./pages/loginPage";
-import ProfilePage from "./pages/profilePage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
