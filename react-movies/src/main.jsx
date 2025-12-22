@@ -51,7 +51,6 @@ const App = () => {
             <Route path="/movies/popular" element={<PopularMoviesPage/>}/>
             <Route path="/signup" element={<SignupPage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/profile" element={<ProfilePage/>}/>
             <Route path="*" element={ <Navigate to="/" /> } />
           </Routes>
         </MoviesContextProvider>
