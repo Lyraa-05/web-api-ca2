@@ -19,20 +19,17 @@ router.get('/upcoming', asyncHandler(async (req, res) => {
     res.status(200).json(upcomingMovies);
 }));
 
-// Get popular movies
 router.get('/popular', asyncHandler(async (req, res) => {
     const page = req.query.page || 1;
     const popularMovies = await getPopularMovies(page);
     res.status(200).json(popularMovies);
 }));
 
-// Get all genres
 router.get('/genres', asyncHandler(async (req, res) => {
     const genres = await getGenres();
     res.status(200).json(genres);
 }));
 
-// Get specific movie details
 router.get('/:id', asyncHandler(async (req, res) => {
     const { id } = req.params;
     const movie = await getMovie(id);
@@ -58,7 +55,6 @@ router.get('/:id/images', asyncHandler(async (req, res) => {
     res.status(200).json(images);
 }));
 
-// Get movie reviews
 router.get('/:id/reviews', asyncHandler(async (req, res) => {
     const { id } = req.params;
     const reviews = await getMovieReviews(id);
