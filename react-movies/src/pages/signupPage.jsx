@@ -16,12 +16,15 @@ const SignUpPage = () => {
 
     if (validPassword && password === passwordAgain) {
       let result = await context.register(userName, password);
-      setRegistered(result);
+      if (result) {
+        await context.authenticate(userName, password);
+        setRegistered(true)
+      }
     }
   }
 
   if (registered === true) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
   return (
