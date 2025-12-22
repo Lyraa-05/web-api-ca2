@@ -1,50 +1,66 @@
-import express import express from 'express';
+import express from 'express';
 import Review from './reviewModel';
 import asyncHandler from 'express-async-handler';
+import authenticate from "../../authenticate";
 
 const router = express.Router(); // eslint-disable-line
 
-router.get('/', async (req, res) => {
-    console.log(req.user);
-    const tasks = await Review.find({ userId: `${req.user._id}`});
-    res.status(200).json(tasks);
-});
+import express from "express";
+import Review from "./reviewModel";
+import asyncHandler from "express-async-handler";
+import authenticate from "../../authenticate";
 
-reviews for specific movie
-router.get('/movie/:movieId', asyncHandler(async (req, res) => {
-    const reviews = await Review.find({ movieId: req.params.movieId });
+const router = express.Router();
+
+/**
+ * GET my reviews
+ */
+router.get(
+  "/",
+  authenticate,
+  asyncHandler(async (req, res) => {
+    const reviews = await Review.find({ userId: req.user._id });
     res.status(200).json(reviews);
-}));
+  })
+);
 
-router.post('/', asyncHandler(async (req, res) => {
-    const newReview = req.body;
-    newReview.userId = req.user._id;
-    const review = await Review(newTask).save();
-    res.status(201).json(task);
-}));
-
-router.put('/:id', async (req, res) => {
-    if (req.body._id) delete req.body._id;
-    const result = await Review.updateOne({
-        _id: req.params.id,
-    }, req.body);
-    if (result.matchedCount) {
-        res.status(200).json({ code:200, msg: 'Review Updated Successfully' });
-    } else {
-        res.status(404).json({ code: 404, msg: 'Unable to find review' });
-    }
-});
-
-router.delete('/:id', async (req, res) => {
-    const result = await Review.deleteOne({
-        _id: req.params.id,
+/**
+ * POST a review
+ */
+router.post(
+  "/",
+  authenticate,
+  asyncHandler(async (req, res) => {
+    const review = await Review.create({
+      movieId: req.body.movieId,
+      description: req.body.review,   // map from frontend
+      rating: req.body.rating,
+      userId: req.user._id,
     });
-    if (result.deletedCount) {
-        res.status(204).json();
-    } else {
-        res.status(404).json({ code: 404, msg: 'Unable to find Task' });
+
+    res.status(201).json(review);
+  })
+);
+
+/**
+ * DELETE my review
+ */
+router.delete(
+  "/:id",
+  authenticate,
+  asyncHandler(async (req, res) => {
+    const result = await Review.deleteOne({
+      _id: req.params.id,
+      userId: req.user._id,
+    });
+
+    if (!result.deletedCount) {
+      return res.status(404).json({ message: "Review not found" });
     }
-});
+
+    res.status(204).end();
+  })
+);
 
 
 
