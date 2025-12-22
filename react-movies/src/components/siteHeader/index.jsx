@@ -50,7 +50,7 @@ const SiteHeader = () => {
 
   return (
     <>
-      <AppBar position="fixed" color="primary">
+      <AppBar position="fixed" sx={{backgroundColor: context.isAuthenticated ? "primary":"red"}}>
         <Toolbar>
           <Typography variant="h4" sx={{ flexGrow: 1 }}>
             <b>Lyra MovieBase</b>
