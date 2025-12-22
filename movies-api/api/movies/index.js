@@ -1,7 +1,7 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 import { getMovies, getUpcomingMovies, getPopularMovies,
-    getMovie, getMovieCredits, getMovieRecomendations,
+    getMovie, getMovieCredits, getMovieRecommendations,
     getMovieImages, getMovieReviews,getGenres} from '../tmdb-api'; 
 
 const router = express.Router();
